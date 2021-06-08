@@ -6,15 +6,17 @@
 .dialogsItems{
     padding: 10px;
 }
-/* 
-.dialog{
 
+.dialogsItems a{
+    color:white;
+    text-decoration: none;
 }
-
+/* 
 .messages {
     padding: 10px;
 }
-
+*/
 .message {
-
-} */
+    color: white;
+    padding: 10px;
+} 
