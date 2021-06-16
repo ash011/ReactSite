@@ -1,10 +1,13 @@
+let rerenderEntireTree
+
 let states = {
         profilePage: {
             posts: [
             {message: "Hi world"},
             {message: "Hallo world"},
             {message: "Hi everyone"}
-            ]
+            ],
+            newPostText: "Ashot"
         },
         dialogsPage: {
             dialogs: [
@@ -21,5 +24,24 @@ let states = {
             ]
         } 
 }
+window.state = states
+export const addPost = (postInfo) => {
+    let newPost = {
+        message: states.profilePage.newPostText
+    }
+    if(states.profilePage.newPostText) states.profilePage.posts.push(newPost);
+    states.profilePage.newPostText = ""
+    rerenderEntireTree(states)
+}
+
+export const updateNewPostText = (newText) => {
+    states.profilePage.newPostText = newText
+    rerenderEntireTree(states)
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer
+}
+
 
 export default states;
