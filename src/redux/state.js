@@ -1,6 +1,5 @@
-let rerenderEntireTree
-
-let states = {
+let store = {
+    _states: {
         profilePage: {
             posts: [
             {message: "Hi world"},
@@ -23,25 +22,30 @@ let states = {
                 {message: "By"},
             ]
         } 
-}
-window.state = states
-export const addPost = (postInfo) => {
-    let newPost = {
-        message: states.profilePage.newPostText
+    },
+    _rerenderEntireTree(){},
+
+    getState(){
+        return this._states
+    },
+    subscribe(observer){
+        this._rerenderEntireTree = observer
+    },
+
+    dispatch(action){
+        if(action.type === "ADD-POST"){
+            let newPost = {
+                message: this._states.profilePage.newPostText
+            };
+            if(this._states.profilePage.newPostText) this._states.profilePage.posts.push(newPost);
+            this._states.profilePage.newPostText = "";
+            this._rerenderEntireTree(this._states) 
+        } else if(action.type === "UPDATE-NEW-POST-TEXT"){
+            this._states.profilePage.newPostText = action.newText
+            this._rerenderEntireTree(this._states)
+        }
     }
-    if(states.profilePage.newPostText) states.profilePage.posts.push(newPost);
-    states.profilePage.newPostText = ""
-    rerenderEntireTree(states)
 }
+window.store = store
 
-export const updateNewPostText = (newText) => {
-    states.profilePage.newPostText = newText
-    rerenderEntireTree(states)
-}
-
-export const subscribe = (observer) => {
-    rerenderEntireTree = observer
-}
-
-
-export default states;
+export default store;
