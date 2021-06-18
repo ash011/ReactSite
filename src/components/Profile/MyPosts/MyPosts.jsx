@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/state";
+import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profileReducer";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
