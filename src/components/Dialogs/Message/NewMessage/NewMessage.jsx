@@ -1,5 +1,4 @@
 import React from "react";
-import { sendMessageActionCreator, updateNewMessageTextActionCreator } from "../../../../redux/dialogsReducer";
 import style from "./NewMessage.module.css"
 
 const NewMessage = (props) => {
@@ -7,10 +6,10 @@ const NewMessage = (props) => {
 
     const onMessageChange = () => {
         let text = newMessage.current.value;
-        props.dispatch(updateNewMessageTextActionCreator(text))
+        props.messageChange(text)
     }
     const sendMessage = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
     return (
         <div className={style.newMessage}>
